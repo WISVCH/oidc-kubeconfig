@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>CH Kubeconfig</title>
+
+    <link href="https://cdn.jsdelivr.net/webjars/org.webjars.bower/wisvch-bootstrap-theme/0.0.3/dist/css/bootstrap.min.css"  rel="stylesheet" media="screen"/>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/"><samp>CH Kubeconfig</samp></a>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="row">
+            Save the following to <code>~/.kube/config</code>:<br/>
+            <pre style="background-color: #222; color: #ddd; overflow: auto; box-sizing: border-box;">
+apiVersion: v1
+kind: Config
+current-context: wisvch-oidc
+clusters:
+- name: wisvch
+  cluster:
+    server: https://10.54.8.30:6443
+    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUN5RENDQWJDZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRFM01EUXdPREV4TXpBME0xb1hEVEkzTURRd05qRXhNekEwTTFvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTEdSCk8yeVZpdktidU1UZU5va2tXVm16OUZXQmF3UGZneUpXYVFzckpKdVZvL3pia2RRMFlYWE5IZkdnb1Y3MklJekoKNS85RG5IcFM5QWRIUU9wS0o4NzVsQ3VUeFdrYTdqMklOT2pCT0JDVHZ1bWRYUG1tLzN0UUdWZW94Y0UzNGlPMgprVUpsK201eU1vUEVKeWgwVE9ReXIxZ0hjZjRxMmdLNUpoQUppamdxdFZBM1lPQ3pTTVF0RFhwQXNZdy8yNDlJCkwwb0FVRHZiN08vSzhlQVNXNFlWVDRocHBQOFlEOFZLdXhNNTBDa2VsWEhoSmNvSEVDK3FYeldaMFVVN3RnNnYKVVNlWTdrQmgxdmJBVDhtZ2JYakEwdnJhVW1jUCtuV0dSM1Uwanh2ZEltdGVZT2RYdWpHNmZJeFdnYWZQbnkzdQpoTmgwQzdJM2Y5WE5XT2E2cHBNQ0F3RUFBYU1qTUNFd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0RRWUpLb1pJaHZjTkFRRUxCUUFEZ2dFQkFCVjJyVElaa3RONHlXZkNSYlFETHBwSUMrY3IKY3ozMGswaHBMQkh0VmQ4Si9GODNkek5NaU93Z1ROMW9JOTBJdm1HTVJ4aXg1VDNsTFFkU3FxdU9SMm1ib0JuegpmT2tTVUhrWlJ5OHAyOU9CcFc4R3dtQXVOOUk5YVZEZnEweW9Zdjgrc0Zld25NT1YyZmZLR3E0YWR3UXp5YjdYCnhTbmNMRUVEa2FPVTRwSFdnVis1WWpIWm15cWg0ekY1dXFwNjlpV1B3NGkzVkRvZmFSbEJvS0lOaUwvVmxPN24KZElaTXpyWUZFZFBmNDE4NklWdlQvWXNYUTdJbDBHQTRscHlVMHByOW1SUjZsem1jYzdvZkRaUUwrRks3NW9xVApXWmE3emJxV2xpeit5VnlHY0J3bzZWanJxRm8yZVhjdlQrdkIyQkpPU1FuQko1aUhFT1I2OG13a0hRQT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+contexts:
+- name: wisvch-oidc
+  context:
+    cluster: wisvch
+    user: oidc:{{ .Subject }}
+users:
+- name: oidc:{{ .Subject }}
+  user:
+    auth-provider:
+      name: oidc
+      config:
+        client-id: {{ .ClientID }}
+        client-secret: {{ .ClientSecret }}
+        idp-issuer-url: {{ .Issuer }}
+        refresh-token: {{ .RefreshToken }}
+</pre>
+        </div>
+    </div>
+</div>
+</body>
+</html>
