@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/coreos/go-oidc"
 	"github.com/dchest/uniuri"
 	"github.com/gorilla/securecookie"
@@ -67,6 +68,11 @@ func main() {
 	tmpl := template.Must(template.ParseFiles("template.html"))
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		if r.URL.Path != "/" {
+			http.NotFound(w, r)
+			return
+		}
+
 		session, _ := store.Get(r, sessionName)
 		val, ok := session.Values["subject"]
 		if !ok {
@@ -126,6 +132,10 @@ func main() {
 		session.Save(r, w)
 
 		http.Redirect(w, r, "/", http.StatusFound)
+	})
+
+	http.HandleFunc("/healthz", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintln(w, "ok")
 	})
 
 	log.Printf("listening on http://%s/", "0.0.0.0:8000")
