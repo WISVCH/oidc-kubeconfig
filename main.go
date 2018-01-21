@@ -60,7 +60,7 @@ func main() {
 		ClientID:     config.ClientID,
 		ClientSecret: config.ClientSecret,
 		RedirectURL:  config.RedirectURL,
-		Scopes:       []string{"openid", "offline_access"},
+		Scopes:       []string{"ldap", "openid", "offline_access"},
 		Endpoint:     provider.Endpoint(),
 	}
 	verifier := provider.Verifier(&oidc.Config{ClientID: config.ClientID})
@@ -105,7 +105,7 @@ func main() {
 
 		val, ok := session.Values["state"]
 		if !ok || r.URL.Query().Get("state") != val.(string) {
-			http.Error(w, "state did not match", http.StatusBadRequest)
+			http.Error(w, "State did not match", http.StatusBadRequest)
 			return
 		}
 
@@ -117,7 +117,7 @@ func main() {
 
 		rawIDToken, ok := oauth2Token.Extra("id_token").(string)
 		if !ok {
-			http.Error(w, "No id_token.", http.StatusInternalServerError)
+			http.Error(w, "No ID token", http.StatusInternalServerError)
 			return
 		}
 
