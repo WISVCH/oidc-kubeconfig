@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"github.com/coreos/go-oidc"
 	"github.com/dchest/uniuri"
-	"github.com/gorilla/securecookie"
 	"github.com/gorilla/sessions"
 	"github.com/kelseyhightower/envconfig"
 	"golang.org/x/net/context"
@@ -19,6 +18,7 @@ type Config struct {
 	ClientSecret string `required:"true"`
 	Issuer       string `required:"true"`
 	RedirectURL  string `required:"true"`
+	CookieSecret string `required:"true"`
 }
 
 type KubeAuthData struct {
@@ -29,18 +29,7 @@ type KubeAuthData struct {
 	RefreshToken string
 }
 
-var (
-	sessionName = "kubeauth"
-
-	store = sessions.NewCookieStore(
-		securecookie.GenerateRandomKey(32),
-		securecookie.GenerateRandomKey(32),
-	)
-)
-
-func init() {
-	store.Options.MaxAge = 0
-}
+var sessionName = "kubeauth"
 
 func main() {
 	var config Config
@@ -48,6 +37,9 @@ func main() {
 	if err != nil {
 		log.Fatal(err.Error())
 	}
+
+	store := sessions.NewCookieStore([]byte(config.CookieSecret))
+	store.MaxAge(0)
 
 	ctx := context.Background()
 
