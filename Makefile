@@ -5,7 +5,7 @@ TAG:=dev-$(shell date +%s)
 all: build push
 
 build:
-	@docker build --no-cache --pull -t wisvch/oidc-kubeconfig:${TAG} .
+	@docker build --no-cache --pull -t quay.io/wisvch/oidc-kubeconfig:${TAG} .
 
 push:
-	@docker push wisvch/oidc-kubeconfig:${TAG}
+	@docker push quay.io/wisvch/oidc-kubeconfig:${TAG}

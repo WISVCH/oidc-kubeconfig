@@ -2,11 +2,11 @@ sudo: required
 services:
 - docker
 script:
-- docker build --no-cache --pull -t wisvch/oidc-kubeconfig:$TRAVIS_BUILD_NUMBER .
+- docker build --no-cache --pull -t quay.io/wisvch/oidc-kubeconfig:$TRAVIS_BUILD_NUMBER .
 after_success:
 - if [ "${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}" == "master" ]; then
-    docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-    docker push wisvch/oidc-kubeconfig:$TRAVIS_BUILD_NUMBER;
+    docker login -u="$QUAY_USERNAME" -p="$QUAY_PASSWORD" quay.io;
+    docker push quay.io/wisvch/oidc-kubeconfig:$TRAVIS_BUILD_NUMBER;
   fi
 notifications:
   email: false
