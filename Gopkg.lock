@@ -5,7 +5,7 @@
   branch = "v2"
   name = "github.com/coreos/go-oidc"
   packages = ["."]
-  revision = "065b426bd41667456c1a924468f507673629c46b"
+  revision = "1180514eaf4d9f38d0d19eef639a1d695e066e72"
 
 [[projects]]
   branch = "master"
@@ -50,7 +50,7 @@
     ".",
     "cacheobject"
   ]
-  revision = "0dec1b30a0215bb68605dfc568e8855066c9202d"
+  revision = "525d0eb5f91d30e3b1548de401b7ef9ea6898520"
 
 [[projects]]
   branch = "master"
@@ -59,7 +59,7 @@
     "ed25519",
     "ed25519/internal/edwards25519"
   ]
-  revision = "91a49db82a88618983a78a06c1cbd4e00ab749ab"
+  revision = "e73bf333ef8920dbb52ad18d4bd38ad9d9bc76d7"
 
 [[projects]]
   branch = "master"
@@ -68,7 +68,7 @@
     "context",
     "context/ctxhttp"
   ]
-  revision = "22ae77b79946ea320088417e4d50825671d82d57"
+  revision = "5f9ae10d9af5b1c89ae6904293b14b064d4ada23"
 
 [[projects]]
   branch = "master"
@@ -77,7 +77,7 @@
     ".",
     "internal"
   ]
-  revision = "2f32c3ac0fa4fb807a0fcefb0b6f2468a0d99bd0"
+  revision = "6881fee410a5daf86371371f9ad451b95e168b71"
 
 [[projects]]
   name = "google.golang.org/appengine"
@@ -100,8 +100,8 @@
     "cipher",
     "json"
   ]
-  revision = "6ee92191fea850cdcab9a18867abf5f521cdbadb"
-  version = "v2.1.4"
+  revision = "76dd09796242edb5b897103a75df2645c028c960"
+  version = "v2.1.6"
 
 [solve-meta]
   analyzer-name = "dep"
