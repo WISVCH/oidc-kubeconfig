@@ -1,6 +1,7 @@
 FROM golang AS builder
-COPY . /go/src/github.com/wisvch/oidc-kubeconfig
-RUN go install github.com/wisvch/oidc-kubeconfig
+WORKDIR /src
+COPY . .
+RUN go install
 
 FROM wisvch/debian:stretch-slim
 WORKDIR /srv
