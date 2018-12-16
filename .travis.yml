@@ -1,8 +1,8 @@
-sudo: required
+language: minimal
 services:
-- docker
+  - docker
 script:
-- docker build --no-cache --pull -t quay.io/wisvch/oidc-kubeconfig:$TRAVIS_BUILD_NUMBER .
+  - docker build --no-cache --pull -t quay.io/wisvch/oidc-kubeconfig:$TRAVIS_BUILD_NUMBER .
 deploy:
   provider: script
   script: sh -c 'docker login -u "$QUAY_USERNAME" -p "$QUAY_PASSWORD" quay.io; docker push quay.io/wisvch/oidc-kubeconfig:$TRAVIS_BUILD_NUMBER'
