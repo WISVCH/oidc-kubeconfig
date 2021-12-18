@@ -3,7 +3,7 @@ WORKDIR /src
 COPY . .
 RUN go install
 
-FROM wisvch/debian:stretch-slim
+FROM ghcr.io/wisvch/debian:bullseye-slim
 WORKDIR /srv
 COPY --from=builder /go/bin/oidc-kubeconfig /srv
 COPY template.html /srv
