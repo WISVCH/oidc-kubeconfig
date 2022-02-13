@@ -1,5 +1,7 @@
 module github.com/WISVCH/oidc-kubeconfig
 
+go 1.14
+
 require (
 	github.com/coreos/go-oidc v2.0.0+incompatible
 	github.com/davecgh/go-spew v1.1.1 // indirect
