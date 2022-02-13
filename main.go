@@ -70,7 +70,12 @@ func main() {
 		if !ok {
 			state := uniuri.New()
 			session.Values["state"] = state
-			session.Save(r, w)
+			err := session.Save(r, w)
+			if err != nil {
+				log.Printf("session save error: %v", err)
+				http.Error(w, "session save error", http.StatusInternalServerError)
+				return
+			}
 			http.Redirect(w, r, oauth2Config.AuthCodeURL(state), http.StatusFound)
 			return
 		}
@@ -85,7 +90,12 @@ func main() {
 			RefreshToken: refreshToken,
 		}
 
-		tmpl.Execute(w, kubeAuthData)
+		err := tmpl.Execute(w, kubeAuthData)
+		if err != nil {
+			log.Printf("template error: %v", err)
+			http.Error(w, "template error", http.StatusInternalServerError)
+			return
+		}
 	})
 
 	http.HandleFunc("/callback", func(w http.ResponseWriter, r *http.Request) {
@@ -121,7 +131,12 @@ func main() {
 
 		session.Values["subject"] = idToken.Subject
 		session.Values["refreshToken"] = oauth2Token.RefreshToken
-		session.Save(r, w)
+		err = session.Save(r, w)
+		if err != nil {
+			log.Printf("session save error: %v", err)
+			http.Error(w, "session save error", http.StatusInternalServerError)
+			return
+		}
 
 		http.Redirect(w, r, "/", http.StatusFound)
 	})
