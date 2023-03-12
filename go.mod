@@ -15,7 +15,7 @@ require (
 	github.com/pquerna/cachecontrol v0.0.0-20180306154005-525d0eb5f91d // indirect
 	github.com/stretchr/testify v1.2.2 // indirect
 	golang.org/x/crypto v0.1.0 // indirect
-	golang.org/x/net v0.1.0
+	golang.org/x/net v0.7.0
 	golang.org/x/oauth2 v0.0.0-20180416194528-6881fee410a5
 	google.golang.org/appengine v1.0.0 // indirect
 	gopkg.in/square/go-jose.v2 v2.1.6 // indirect
